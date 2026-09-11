@@ -3,21 +3,31 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BrandMark, ArrowIcon } from "../utils/uiComponents";
 import { auth } from "../utils/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { addUser } from "../redux/userSlice";
 
 const defaultFormData = {
+  name: "",
   email: "",
   password: "",
 };
 
 function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState(defaultFormData);
+  const [isSignUp, setIsSignUp] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
-    console.log(name, value);
 
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -28,18 +38,76 @@ function Login() {
   const handleLogin = (event) => {
     event.preventDefault();
 
-    createUserWithEmailAndPassword(auth, formData.email, formData.password)
-      .then((userCredential) => {
-        // Signed up
+    if (isSignUp && !formData.name.trim()) {
+      toast.error("Please enter your name.");
+      return;
+    }
+
+    const authRequest = isSignUp
+      ? createUserWithEmailAndPassword(auth, formData.email, formData.password)
+      : signInWithEmailAndPassword(auth, formData.email, formData.password);
+
+    authRequest
+      .then(async (userCredential) => {
         const user = userCredential.user;
-        // ...
+        if (isSignUp) {
+          await updateProfile(user, {
+            displayName: formData.name.trim(),
+            photoURL:
+              "https://lh3.googleusercontent.com/a/ACg8ocLKMuApPlM7zk3aD8qgr5UtXJ-jK7K6a_fECsJbLsEhImZAdmWX=s96-c",
+          });
+        }
+
+        dispatch(
+          addUser({
+            uid: user.uid,
+            email: user.email,
+            emailVerified: user.emailVerified,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+            phoneNumber: user.phoneNumber,
+          }),
+        );
+
+        if (isSignUp) {
+          toast.success("Account Created Successfully");
+        } else {
+          toast.success("Login Successfull");
+        }
+        navigate("/dashboard");
+        setFormData(defaultFormData);
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
+
+        let message = "Something went wrong. Please try again.";
+
+        switch (errorCode) {
+          case "auth/email-already-in-use":
+            message =
+              "This email is already registered. Please sign in instead.";
+            break;
+
+          case "auth/invalid-email":
+            message = "Please enter a valid email address.";
+            break;
+
+          case "auth/weak-password":
+            message = "Password should be at least 6 characters.";
+            break;
+
+          case "auth/invalid-credential":
+            message = "Incorrect email or password.";
+            break;
+
+          default:
+            message = "Unable to complete your request. Please try again.";
+        }
         // ..
+        toast.error(message);
       });
   };
+
   return (
     <main className="login-page">
       <div className="ambient ambient-one" aria-hidden="true" />
@@ -78,15 +146,40 @@ function Login() {
         </div>
       </section>
 
-      <section className="form-panel" aria-label="Sign in">
+      <section
+        className="form-panel"
+        aria-label={isSignUp ? "Create an account" : "Sign in"}
+      >
         <div className="login-card">
           <div className="card-heading">
-            <p className="card-kicker">Welcome back</p>
-            <h2>Sign in to your account</h2>
-            <p className="card-subtitle">Pick up right where you left off.</p>
+            <p className="card-kicker">
+              {isSignUp ? "Start your journey" : "Welcome back"}
+            </p>
+            <h2>
+              {isSignUp ? "Create your account" : "Sign in to your account"}
+            </h2>
+            <p className="card-subtitle">
+              {isSignUp
+                ? "Get personalized recommendations for your next watch."
+                : "Pick up right where you left off."}
+            </p>
           </div>
 
           <form className="login-form" onSubmit={handleLogin}>
+            {isSignUp && (
+              <>
+                <label htmlFor="name">Name</label>
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="Enter your name"
+                  value={formData.name}
+                  name="name"
+                  onChange={handleChange}
+                />
+              </>
+            )}
+
             <label htmlFor="email">Email address</label>
             <input
               id="email"
@@ -109,20 +202,22 @@ function Login() {
               onChange={handleChange}
             />
 
-            <button
-              className="submit-button"
-              type="button"
-              onClick={() => navigate("/dashboard")}
-            >
-              Sign in
+            <button className="submit-button" type="submit">
+              {isSignUp ? "Sign Up" : "Sign in"}
               <ArrowIcon />
             </button>
           </form>
 
           <p className="signup-prompt">
-            New to NetflixGPT?{" "}
-            <a href="#create-account">
-              Create an account <span>↗</span>
+            {isSignUp ? "Already have an account?" : "New to NetflixGPT?"}{" "}
+            <a
+              href={isSignUp ? "#sign-in" : "#create-account"}
+              onClick={(event) => {
+                event.preventDefault();
+                setIsSignUp((currentValue) => !currentValue);
+              }}
+            >
+              {isSignUp ? "Sign in" : "Create an account"} <span>↗</span>
             </a>
           </p>
         </div>

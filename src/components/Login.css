@@ -249,7 +249,9 @@
   font-weight: 600;
   margin-bottom: 9px;
 }
+.login-form input[type="text"],
 .login-form input[type="email"],
+.login-form input[type="url"],
 .login-form input[type="password"] {
   background: #fff;
   border: 1px solid var(--line);
@@ -270,7 +272,9 @@
 .login-form input::placeholder {
   color: #b8b8bd;
 }
+.login-form input[type="text"]:focus,
 .login-form input[type="email"]:focus,
+.login-form input[type="url"]:focus,
 .login-form input[type="password"]:focus {
   border-color: var(--coral);
   box-shadow: 0 0 0 3px rgba(255, 91, 72, 0.1);

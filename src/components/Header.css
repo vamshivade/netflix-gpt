@@ -1,0 +1,168 @@
+.site-header {
+  --app-ink: #171a24;
+  --app-border: rgba(255, 255, 255, 0.12);
+  --app-coral: #ff5b48;
+  --app-coral-light: #ff7868;
+  --app-green: #55c58a;
+  --app-text: #f8f6f2;
+  background: rgba(23, 26, 36, 0.74);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 12px 34px rgba(7, 9, 15, 0.18);
+
+  border-bottom: 1px solid var(--app-border);
+  color: var(--app-text);
+  font-family: "DM Sans", sans-serif;
+  position: sticky;
+  z-index: 10;
+}
+
+.header-inner {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1320px;
+  min-height: 76px;
+  padding: 0 34px;
+}
+
+.header-brand {
+  align-items: center;
+  display: flex;
+  gap: 11px;
+}
+
+.header-brand .brand-mark {
+  align-items: center;
+  background: var(--app-coral);
+  border-radius: 9px;
+  display: flex;
+  height: 35px;
+  justify-content: center;
+  transform: rotate(-8deg);
+  width: 30px;
+}
+
+.header-brand .brand-mark span {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -4px;
+  line-height: 1;
+  transform: rotate(8deg) translateX(-2px);
+}
+
+.header-brand-name {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+}
+
+.header-brand-name span {
+  color: var(--app-coral);
+}
+
+.header-actions {
+  align-items: center;
+  display: flex;
+  gap: 20px;
+}
+
+.profile-button {
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 39px;
+  padding: 0;
+  position: relative;
+  width: 39px;
+}
+
+.profile-button img {
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+  width: 100%;
+}
+
+.profile-button:hover img {
+  border-color: var(--app-coral-light);
+  transform: scale(1.05);
+}
+
+.profile-status {
+  background: var(--app-green);
+  border: 2px solid var(--app-ink);
+  border-radius: 50%;
+  bottom: 0;
+  height: 10px;
+  position: absolute;
+  right: -1px;
+  width: 10px;
+}
+
+.signout-button {
+  align-items: center;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 6px;
+  color: #d9d8d6;
+  cursor: pointer;
+  display: flex;
+  font:
+    600 12px "DM Sans",
+    sans-serif;
+  gap: 8px;
+  padding: 10px 14px;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.signout-button:hover {
+  background: rgba(255, 91, 72, 0.12);
+  border-color: rgba(255, 120, 104, 0.65);
+  color: #fff;
+}
+
+.signout-icon {
+  display: flex;
+}
+
+.signout-icon svg {
+  height: 16px;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+  width: 16px;
+}
+
+@media (max-width: 560px) {
+  .header-inner {
+    min-height: 68px;
+    padding: 0 18px;
+  }
+
+  .header-actions {
+    gap: 13px;
+  }
+
+  .signout-button {
+    border: 0;
+    padding: 8px;
+  }
+
+  .signout-button > span:last-child {
+    display: none;
+  }
+}

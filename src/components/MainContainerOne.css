@@ -1,0 +1,155 @@
+.MainContainerOne {
+  align-items: center;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.96) 0%,
+      rgba(0, 0, 0, 0.68) 42%,
+      rgba(0, 0, 0, 0.1) 100%
+    ),
+    #171717;
+  box-sizing: border-box;
+  display: flex;
+  min-height: 100vh;
+  padding: 80px 7vw;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.videotitle-container {
+  color: #fff;
+  max-width: 480px;
+  position: relative;
+  z-index: 1;
+}
+
+.video-kicker {
+  color: #e5e5e5;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+.videotitle-container h1 {
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(48px, 7vw, 88px);
+  font-weight: 700;
+  letter-spacing: -3px;
+  line-height: 0.9;
+  margin: 0 0 26px;
+  max-width: 520px;
+  text-transform: uppercase;
+}
+
+.video-description {
+  color: #e4e4e4;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 440px;
+}
+
+.video-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.video-actions button {
+  align-items: center;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  font-weight: 700;
+  gap: 9px;
+  min-height: 44px;
+  padding: 0 22px;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.video-actions button:hover {
+  opacity: 0.82;
+  transform: translateY(-1px);
+}
+
+.video-play-button {
+  background: #fff;
+  color: #111;
+}
+
+.video-play-button span {
+  font-size: 13px;
+}
+
+.video-info-button {
+  background: rgba(90, 90, 90, 0.9);
+  color: #fff;
+}
+
+.videoplay-container {
+  height: 100%;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+}
+
+.videoplay-container::after {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.45) 46%,
+    rgba(0, 0, 0, 0.12) 100%
+  );
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.videoplay-container iframe {
+  aspect-ratio: 16 / 9;
+  border: 0;
+  height: auto;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+@media (max-width: 560px) {
+  .MainContainerOne {
+    min-height: 100vh;
+    padding: 56px 24px;
+  }
+
+  .videoplay-container iframe {
+    aspect-ratio: auto;
+    height: 100%;
+    min-width: 177.78vh;
+    width: auto;
+  }
+
+  .videotitle-container h1 {
+    font-size: 52px;
+    letter-spacing: -2px;
+  }
+
+  .video-description {
+    font-size: 14px;
+  }
+
+  .video-actions button {
+    font-size: 14px;
+    padding: 0 18px;
+  }
+}

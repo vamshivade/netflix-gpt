@@ -13,8 +13,7 @@
     #1b1e29;
   color: var(--app-text, #f8f6f2);
   min-height: 100vh;
-  overflow: hidden;
-  position: relative;
+  overflow-x: hidden;
 }
 
 .dashboard-page::before {
@@ -27,6 +26,55 @@
   mask-image: linear-gradient(to bottom, black, transparent 78%);
   pointer-events: none;
   position: absolute;
+}
+
+.dashboard-page > main {
+  padding-top: 0;
+}
+
+.dashboard-error {
+  align-items: flex-start;
+  background: #171922;
+  color: #f8f6f2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 8vw;
+}
+
+.dashboard-error-kicker {
+  color: #ff7868;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin: 0 0 16px;
+  text-transform: uppercase;
+}
+
+.dashboard-error h1 {
+  font-size: clamp(34px, 5vw, 64px);
+  letter-spacing: -2px;
+  line-height: 1;
+  margin: 0;
+  max-width: 620px;
+}
+
+.dashboard-error p:not(.dashboard-error-kicker) {
+  color: #b7b8c1;
+  margin: 20px 0 28px;
+}
+
+.dashboard-error button {
+  background: #ff5b48;
+  border: 0;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font:
+    600 14px "DM Sans",
+    sans-serif;
+  padding: 13px 20px;
 }
 
 .dashboard-content {
@@ -108,6 +156,10 @@
 }
 
 @media (max-width: 560px) {
+  .dashboard-page > main {
+    padding-top: 0;
+  }
+
   .dashboard-content {
     padding: 64px 18px 60px;
   }

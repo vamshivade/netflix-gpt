@@ -31,6 +31,11 @@ const Header = () => {
           nameClassName="header-brand-name"
         />
 
+        <nav className="header-nav" aria-label="Primary navigation">
+          <a href="#home">Home</a>
+          <a href="#trending">Trending now</a>
+        </nav>
+
         <div className="header-actions">
           <button
             className="profile-button"

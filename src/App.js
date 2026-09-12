@@ -1,24 +1,13 @@
 import { useEffect } from "react";
-import Login from "./components/Login";
-import Dashboard from "./components/Dashboard";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+
+import appRouter from "./routes/appRouter";
 
 import { useDispatch } from "react-redux";
 import { auth } from "./utils/firebase";
 import { addUser, removeUser } from "./redux/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
-
-const appRouter = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />,
-  },
-  {
-    path: "/dashboard",
-    element: <Dashboard />,
-  },
-]);
 
 function App() {
   const dispatch = useDispatch();

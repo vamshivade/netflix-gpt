@@ -1,7 +1,7 @@
 import "./Login.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BrandMark, ArrowIcon } from "../utils/uiComponents";
+import { Brand, ArrowIcon } from "../utils/uiComponents";
 import { auth } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
@@ -56,18 +56,18 @@ function Login() {
             photoURL:
               "https://lh3.googleusercontent.com/a/ACg8ocLKMuApPlM7zk3aD8qgr5UtXJ-jK7K6a_fECsJbLsEhImZAdmWX=s96-c",
           });
-        }
 
-        dispatch(
-          addUser({
-            uid: user.uid,
-            email: user.email,
-            emailVerified: user.emailVerified,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
-            phoneNumber: user.phoneNumber,
-          }),
-        );
+          dispatch(
+            addUser({
+              uid: user.uid,
+              email: user.email,
+              emailVerified: user.emailVerified,
+              displayName: user.displayName,
+              photoURL: user.photoURL,
+              phoneNumber: user.phoneNumber,
+            }),
+          );
+        }
 
         if (isSignUp) {
           toast.success("Account Created Successfully");
@@ -115,12 +115,7 @@ function Login() {
       <div className="grain" aria-hidden="true" />
 
       <section className="showcase-panel" aria-label="NetflixGPT introduction">
-        <header className="brand">
-          <BrandMark />
-          <span className="brand-name">
-            netflix<span>gpt</span>
-          </span>
-        </header>
+        <Brand wrapperClassName="brand" nameClassName="brand-name" />
 
         <div className="showcase-copy">
           <p className="eyebrow">Your next story starts here</p>

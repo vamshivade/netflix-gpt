@@ -1,5 +1,5 @@
 import "./Header.css";
-import { BrandMark } from "../utils/uiComponents";
+import { Brand } from "../utils/uiComponents";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,12 +26,10 @@ const Header = () => {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <div className="header-brand">
-          <BrandMark />
-          <span className="header-brand-name">
-            netflix<span>gpt</span>
-          </span>
-        </div>
+        <Brand
+          wrapperClassName="header-brand"
+          nameClassName="header-brand-name"
+        />
 
         <div className="header-actions">
           <button

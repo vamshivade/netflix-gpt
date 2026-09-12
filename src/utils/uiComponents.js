@@ -6,6 +6,17 @@ export const BrandMark = () => {
   );
 };
 
+export const Brand = ({ wrapperClassName, nameClassName }) => {
+  return (
+    <div className={wrapperClassName}>
+      <BrandMark />
+      <span className={nameClassName}>
+        netflix<span>gpt</span>
+      </span>
+    </div>
+  );
+};
+
 export const ArrowIcon = () => {
   return (
     <svg viewBox="0 0 20 20" aria-hidden="true">

@@ -1,31 +1,27 @@
 import { useEffect } from "react";
-import { OPTIONS } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addMovieVideo } from "../redux/moviesSlice";
+import { getTrendingMovie } from "../api/moviesApi";
 
 const useFetchMovieVideo = (movieId) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(addMovieVideo(null));
+
     if (!movieId) return;
 
     const controller = new AbortController();
 
     const fetchMovieVideo = async () => {
       try {
-        const response = await fetch(
-          "https://api.themoviedb.org/3/movie/" + movieId + "/videos",
-          { ...OPTIONS, signal: controller.signal },
-        );
-
-        if (!response.ok) throw new Error("Failed to fetch movie video");
-
-        const data = await response.json();
+        const data = await getTrendingMovie(movieId, controller.signal);
         const video = data.results?.find(
-          (item) => item.site === "YouTube" && item.type === "Trailer",
+          (item) =>
+            item.site === "YouTube" && item.type === "Trailer" && item.key,
         );
 
-        dispatch(addMovieVideo(video ?? data.results?.[0] ?? null));
+        dispatch(addMovieVideo(video ?? null));
       } catch (error) {
         if (error.name !== "AbortError") dispatch(addMovieVideo(null));
       }

@@ -12,6 +12,8 @@ NetflixGPT is a React-based movie recommendation app inspired by Netflix. It giv
 - Show movie trailer/video details for the featured movie
 - Sign out from the header with a clean Netflix-style UI
 - Route guards to redirect users based on auth state
+- Toggle into a SearchGPT experience for movie-related AI prompts
+- Use Google Gemini to answer search questions and AI-powered movie lookups
 
 ## Tech stack
 
@@ -20,6 +22,7 @@ NetflixGPT is a React-based movie recommendation app inspired by Netflix. It giv
 - Redux Toolkit
 - Firebase Authentication
 - TMDB API
+- Google Gemini API via @google/genai
 - React Hot Toast
 - Create React App
 
@@ -31,6 +34,7 @@ src/
     apiConfig.js
     apiHandler.js
     endpoints.js
+    googleGenai.js
     moviesApi.js
   components/
     common/
@@ -39,12 +43,15 @@ src/
   hooks/
     useFetchMovies.js
     useFetchMovieVideo.js
+    useGoogleGenAI.js
   pages/
     Dashboard/
     Login/
+    SearchGPT/
   redux/
     appStore.js
     moviesSlice.js
+    searchGptSlice.js
     userSlice.js
   routes/
     appRouter.js
@@ -166,7 +173,25 @@ This allows the app to display:
 - trailer or video preview
 - poster grid of movie cards
 
-### 8. Sign out flow
+### 8. SearchGPT and Gemini flow
+
+The app includes an AI-powered SearchGPT view, which is toggled from the header and handled by:
+
+- src/pages/SearchGPT/SearchGPT.js
+- src/hooks/useGoogleGenAI.js
+- src/api/googleGenai.js
+- src/redux/searchGptSlice.js
+
+This flow works like this:
+
+1. User clicks the SearchGPT button in the header
+2. Dashboard conditionally renders the SearchGPT page
+3. User types a movie/search prompt in the input field
+4. The custom hook validates the input and calls Gemini
+5. The API request uses the Google GenAI SDK with the configured API key
+6. Loading state is managed in Redux and UI while the request is in progress
+
+### 9. Sign out flow
 
 The header is in src/components/header/Header.js.
 
@@ -207,6 +232,13 @@ REACT_APP_FIREBASE_APP_ID=your_app_id
 REACT_APP_FIREBASE_MEASUREMENT_ID=your_measurement_id
 REACT_APP_TMDB_URL=https://api.themoviedb.org/3
 REACT_APP_TMDB_TOKEN=your_tmdb_bearer_token
+REACT_APP_GEMINI_API_KEY=your_gemini_api_key
+```
+
+Install the Gemini dependency if it is not already present:
+
+```bash
+npm install @google/genai
 ```
 
 ### 3. Start development server
@@ -251,13 +283,15 @@ This app is a clean example of combining:
 - lazy route loading concepts
 - modern React UI patterns
 
-It is a good project to understand how a real-world movie app is structured from authentication to dashboard content.
+It is a good project to understand how a real-world movie app is structured from authentication to dashboard content, and now also includes a SearchGPT AI mode powered by Google Gemini.
 
 ## Future improvements
 
 Possible enhancements include:
 
-- search movies by name
+- better AI result parsing for movie suggestions
+- search by movie titles with TMDB integration
+- AI-generated movie cards and metadata
 - movie detail page
 - favorites/watchlist feature
 - profile page

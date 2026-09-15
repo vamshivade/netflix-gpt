@@ -19,4 +19,14 @@ const getNowPlayingMovie = (signal) => {
   return apiHandler("GET", endpoints.GET_NOW_PLAYING_MOVIE, null, null, signal);
 };
 
-export { getTrendingMovies, getTrendingMovie, getNowPlayingMovie };
+// GET_TOP_RATED_MOVIES
+const getTopRatedMovies = (signal) => {
+  return apiHandler("GET", endpoints.GET_TOP_RATED_MOVIES, null, null, signal);
+};
+
+export {
+  getTrendingMovies,
+  getTrendingMovie,
+  getNowPlayingMovie,
+  getTopRatedMovies,
+};

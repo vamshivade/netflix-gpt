@@ -28,16 +28,18 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
-  max-width: 1320px;
-  min-height: 76px;
-  padding: 0 34px;
+  margin: 0;
+  max-width: none;
+  min-height: clamp(64px, 5vw, 76px);
+  padding: 0 clamp(16px, 4vw, 64px);
+  width: 100%;
 }
 
 .header-brand {
   align-items: center;
   display: flex;
-  gap: 11px;
+  flex-shrink: 0;
+  gap: clamp(7px, 1vw, 11px);
 }
 
 .header-brand .brand-mark {
@@ -62,7 +64,7 @@
 
 .header-brand-name {
   color: #fff;
-  font-size: 20px;
+  font-size: clamp(17px, 1.8vw, 20px);
   font-weight: 700;
   letter-spacing: -0.8px;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
@@ -96,7 +98,8 @@
 .header-actions {
   align-items: center;
   display: flex;
-  gap: 20px;
+  gap: clamp(10px, 1.6vw, 20px);
+  min-width: 0;
 }
 
 .profile-button {
@@ -179,7 +182,16 @@
 @media (max-width: 560px) {
   .header-inner {
     min-height: 68px;
-    padding: 0 18px;
+    padding: 0 16px;
+  }
+
+  .header-brand .brand-mark {
+    height: 32px;
+    width: 28px;
+  }
+
+  .header-brand .brand-mark span {
+    font-size: 22px;
   }
 
   .header-actions {
@@ -197,5 +209,35 @@
 
   .signout-button > span:last-child {
     display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .header-brand-name {
+    font-size: 16px;
+  }
+
+  .profile-button {
+    height: 34px;
+    width: 34px;
+  }
+
+  .profile-status {
+    height: 9px;
+    width: 9px;
+  }
+
+  .header-actions {
+    gap: 7px;
+  }
+}
+
+@media (min-width: 561px) and (max-width: 760px) {
+  .header-nav {
+    display: none;
+  }
+
+  .header-inner {
+    padding-inline: 24px;
   }
 }

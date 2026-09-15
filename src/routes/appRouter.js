@@ -1,13 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-// import Dashboard from "../components/Dashboard";
-import Login from "../components/Login";
-import PageNotFound from "../components/PageNotFound";
+import Login from "../pages/Login/Login";
+import PageNotFound from "../components/common/PageNotFound";
 import ProtectedRoutes from "./ProtectedRoutes";
 import PublicRoute from "./PublicRoute";
-import RouteLoading from "../components/RouteLoading";
+import RouteLoading from "../components/common/RouteLoading";
 import { lazy, Suspense } from "react";
 
-const Dashboard = lazy(() => import("../components/Dashboard"));
+const Dashboard = lazy(() => import("../pages/Dashboard/Dashboard"));
 
 const appRouter = createBrowserRouter([
   // Public Routes

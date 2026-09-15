@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
-import RouteLoading from "../components/RouteLoading";
+import RouteLoading from "../components/common/RouteLoading";
 
 const ProtectedRoutes = () => {
   const { user, isLoading } = useSelector((store) => store.user);

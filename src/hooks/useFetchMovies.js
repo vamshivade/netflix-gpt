@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
   addMovies,
+  addNowPlayingMovies,
   setMoviesError,
   setMoviesLoading,
 } from "../redux/moviesSlice";
-import { getTrendingMovies } from "../api/moviesApi";
+import { getNowPlayingMovie, getTrendingMovies } from "../api/moviesApi";
 
 const useFetchMovies = () => {
   const dispatch = useDispatch();
@@ -17,13 +18,21 @@ const useFetchMovies = () => {
 
     const fetchMovies = async () => {
       try {
-        const data = await getTrendingMovies(undefined, controller.signal);
+        const [trendingMovies, nowPlayingMovies] = await Promise.all([
+          getTrendingMovies(undefined, controller.signal),
+          getNowPlayingMovie(controller.signal),
+        ]);
 
-        if (!Array.isArray(data.results)) {
+        if (!Array.isArray(trendingMovies.results)) {
           throw new Error("Movie data is unavailable");
         }
 
-        dispatch(addMovies(data));
+        if (!Array.isArray(nowPlayingMovies.results)) {
+          throw new Error("Now playing movie data is unavailable");
+        }
+
+        dispatch(addMovies(trendingMovies));
+        dispatch(addNowPlayingMovies(nowPlayingMovies));
       } catch (error) {
         if (error.name !== "AbortError") {
           dispatch(

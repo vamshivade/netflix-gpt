@@ -1,31 +1,12 @@
 .dashboard-page {
-  background:
-    radial-gradient(
-      circle at 85% 15%,
-      rgba(255, 91, 72, 0.12),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 12% 78%,
-      rgba(75, 81, 145, 0.18),
-      transparent 31%
-    ),
-    #1b1e29;
+  background-image: linear-gradient(
+    177.6deg,
+    rgb(11, 0, 65) 15.3%,
+    rgb(1, 0, 30) 91.3%
+  );
   color: var(--app-text, #f8f6f2);
   min-height: 100vh;
   overflow-x: hidden;
-}
-
-.dashboard-page::before {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 44px 44px;
-  content: "";
-  inset: 0;
-  mask-image: linear-gradient(to bottom, black, transparent 78%);
-  pointer-events: none;
-  position: absolute;
 }
 
 .dashboard-page > main {
@@ -50,6 +31,20 @@
   letter-spacing: 2px;
   margin: 0 0 16px;
   text-transform: uppercase;
+}
+
+#home {
+  width: 100%;
+  height: clamp(620px, 100svh, 900px);
+  min-height: 620px;
+  position: relative;
+  z-index: 0;
+}
+
+#home-2 {
+  margin-top: clamp(-170px, -14vw, -70px);
+  position: relative;
+  z-index: 1;
 }
 
 .dashboard-error h1 {
@@ -178,5 +173,14 @@
   .dashboard-panel h2 {
     font-size: 17px;
     line-height: 1.35;
+  }
+
+  #home {
+    height: 100svh;
+    min-height: 620px;
+  }
+
+  #home-2 {
+    margin-top: -54px;
   }
 }

@@ -14,9 +14,10 @@ const VideoTrailer = () => {
         src={
           "https://www.youtube.com/embed/" +
           videoKeyId +
-          "?autoplay=1&mute=1&controls=0&loop=1&playlist=" +
-          videoKeyId +
-          "&modestbranding=1&rel=0&iv_load_policy=3&disablekb=1&fs=0&playsinline=1"
+          "?autoplay=1&mute=1&controls=0&disablekb=1&fs=0&" +
+          "iv_load_policy=3&loop=1&modestbranding=1&playsinline=1&" +
+          "rel=0&showinfo=0&autohide=1&playlist=" +
+          videoKeyId
         }
         title="Movie trailer"
         allow="autoplay; encrypted-media"

@@ -1,8 +1,8 @@
 import "./Login.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Brand, ArrowIcon } from "../utils/uiComponents";
-import { auth } from "../utils/firebase";
+import { Brand, ArrowIcon } from "../../utils/uiComponents";
+import { auth } from "../../utils/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -11,7 +11,7 @@ import {
 
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { addUser } from "../redux/userSlice";
+import { addUser } from "../../redux/userSlice";
 
 const defaultFormData = {
   name: "",

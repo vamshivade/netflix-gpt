@@ -2,12 +2,11 @@ import "./MainContainerOne.css";
 import VideoTitle from "./VideoTitle";
 import { useSelector } from "react-redux";
 import { useMemo } from "react";
-import useFetchMovieVideo from "../hooks/useFetchMovieVideo";
+import useFetchMovieVideo from "../../hooks/useFetchMovieVideo";
 import VideoTrailer from "./VideoTrailer";
 
 const MainContainerOne = () => {
-
-  const movies = useSelector((store) => store.movies.movies);
+  const movies = useSelector((store) => store.movies.trendingMovies);
 
   const movieResults = movies?.results;
 
@@ -24,7 +23,6 @@ const MainContainerOne = () => {
       );
 
       if (storedMovie) {
-
         return storedMovie;
       }
     }
@@ -36,7 +34,6 @@ const MainContainerOne = () => {
 
     // 4. Store movie ID
     sessionStorage.setItem("featuredMovieId", String(newMovie.id));
-
 
     return newMovie;
   }, [movieResults]);

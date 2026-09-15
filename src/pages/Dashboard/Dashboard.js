@@ -1,19 +1,21 @@
 import "./Dashboard.css";
-import Header from "./Header";
-import useFetchMovies from "../hooks/useFetchMovies";
+import Header from "../../components/header/Header";
+import useFetchMovies from "../../hooks/useFetchMovies";
 import { useSelector } from "react-redux";
-import RouteLoading from "./RouteLoading";
-import MainContainerOne from "./MainContainerOne";
-import MainContainerTwo from "./MainContainerTwo";
+import RouteLoading from "../../components/common/RouteLoading";
+import MainContainerOne from "../../components/movie/MainContainerOne";
+import MainContainerTwo from "../../components/movie/MainContainerTwo";
 
 const Dashboard = () => {
   useFetchMovies();
 
-  const { movies, isLoading, error } = useSelector((store) => store.movies);
+  const { trendingMovies, isLoading, error } = useSelector(
+    (store) => store.movies,
+  );
 
-  if (isLoading && !movies) return <RouteLoading />;
+  if (isLoading && !trendingMovies) return <RouteLoading />;
 
-  if (error && !movies) {
+  if (error && !trendingMovies) {
     return (
       <main className="dashboard-error">
         <p className="dashboard-error-kicker">Something went wrong</p>
@@ -33,8 +35,9 @@ const Dashboard = () => {
         <div id="home">
           <MainContainerOne />
         </div>
-
-        <MainContainerTwo />
+        <div id="home-2">
+          <MainContainerTwo />
+        </div>
       </main>
     </div>
   );

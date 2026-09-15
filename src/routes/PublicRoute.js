@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
-import RouteLoading from "../components/RouteLoading";
+import RouteLoading from "../components/common/RouteLoading";
 
 const PublicRoute = () => {
   const { user, isLoading } = useSelector((store) => store.user);

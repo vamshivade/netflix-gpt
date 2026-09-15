@@ -1,10 +1,10 @@
 import "./Header.css";
-import { Brand } from "../utils/uiComponents";
+import { Brand } from "../../utils/uiComponents";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { removeUser } from "../redux/userSlice";
-import { auth } from "../utils/firebase";
+import { removeUser } from "../../redux/userSlice";
+import { auth } from "../../utils/firebase";
 import { signOut } from "firebase/auth";
 
 const Header = () => {

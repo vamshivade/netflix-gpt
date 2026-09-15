@@ -1,0 +1,48 @@
+.searchgpt-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 600px;
+  margin: 150px auto 0;
+}
+
+.search-box {
+  min-width: 500px;
+  height: 40px;
+  display: flex;
+  align-items: stretch;
+  font-size: 16px;
+  gap: 5px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 0 10px 0 20px;
+  font-size: 16px;
+  font-weight: 500;
+  background: rgba(144, 143, 143, 0.499);
+  outline: none;
+  border: none;
+  color: white;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.search-box input::placeholder {
+  color: white;
+}
+
+.search-box button {
+  width: 80px;
+  padding: 0 10p;
+  background: linear-gradient(to right, purple, rgb(255, 149, 0));
+  outline: none;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  cursor: pointer;
+}

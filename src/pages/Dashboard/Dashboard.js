@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import RouteLoading from "../../components/common/RouteLoading";
 import MainContainerOne from "../../components/movie/MainContainerOne";
 import MainContainerTwo from "../../components/movie/MainContainerTwo";
+import SearchGPT from "../SearchGPT/SearchGPT";
 
 const Dashboard = () => {
   useFetchMovies();
@@ -12,6 +13,8 @@ const Dashboard = () => {
   const { trendingMovies, isLoading, error } = useSelector(
     (store) => store.movies,
   );
+
+  const isSearchGpt = useSelector((store) => store.searchGpt.isSearchGpt);
 
   if (isLoading && !trendingMovies) return <RouteLoading />;
 
@@ -31,14 +34,18 @@ const Dashboard = () => {
   return (
     <div className="dashboard-page">
       <Header />
-      <main className="">
-        <div id="home">
-          <MainContainerOne />
-        </div>
-        <div id="home-2">
-          <MainContainerTwo />
-        </div>
-      </main>
+      {isSearchGpt ? (
+        <SearchGPT />
+      ) : (
+        <main className="">
+          <div id="home">
+            <MainContainerOne />
+          </div>
+          <div id="home-2">
+            <MainContainerTwo />
+          </div>
+        </main>
+      )}
     </div>
   );
 };

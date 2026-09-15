@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../../redux/userSlice";
 import { auth } from "../../utils/firebase";
 import { signOut } from "firebase/auth";
+import { setIsSearchGpt } from "../../redux/searchGptSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user.user);
+  const searchGpt = useSelector((store) => store.searchGpt.isSearchGpt);
 
   const navigate = useNavigate();
 
@@ -23,6 +25,10 @@ const Header = () => {
     }
   };
 
+  function handleGoToSearchGPT() {
+    dispatch(setIsSearchGpt());
+  }
+
   return (
     <header className="site-header">
       <div className="header-inner">
@@ -32,6 +38,9 @@ const Header = () => {
         />
 
         <div className="header-actions">
+          <button className="netflixgpt-btn" onClick={handleGoToSearchGPT}>
+            {searchGpt ? "Homepage" : "Search GPT"}
+          </button>
           <button
             className="profile-button"
             type="button"

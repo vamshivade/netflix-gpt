@@ -8,6 +8,14 @@ import { lazy, Suspense } from "react";
 
 const Dashboard = lazy(() => import("../pages/Dashboard/Dashboard"));
 
+function WithSuspense({ Component }) {
+  return (
+    <Suspense fallback={<RouteLoading />}>
+      <Component />
+    </Suspense>
+  );
+}
+
 const appRouter = createBrowserRouter([
   // Public Routes
   {
@@ -30,11 +38,7 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: (
-          <Suspense fallback={<RouteLoading />}>
-            <Dashboard />
-          </Suspense>
-        ),
+        element: <WithSuspense Component={Dashboard} />,
       },
     ],
   },
